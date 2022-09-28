@@ -8,10 +8,6 @@ export class CreateUserDto{
 
   readonly name: string;
 
-  readonly phone_num: string;
-
-  readonly company: string;
-
   @IsString({message: "Должно быть строкой"})
   readonly role: string;
 
