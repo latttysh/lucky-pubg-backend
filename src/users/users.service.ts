@@ -9,7 +9,7 @@ export class UsersService {
 
   constructor(@InjectModel(User) private userRepository: typeof User, private roleService: RolesService) {}
 
-  async createUser(dto: CreateUserDto){
+  async createUser(dto){
     const user = await this.userRepository.create(dto)
     const role = await this.roleService.getRoleByValue(dto.role)
     await user.$set("roles", [role.id])
@@ -22,8 +22,15 @@ export class UsersService {
     return users
   }
 
-  async getUserByEmail(email: string){
-    const user = await this.userRepository.findOne({where: {email}, include: {all: true}})
+  async getUserByTelegramId(id: string){
+    const user = await this.userRepository.findOne({where: {telegramId: id}, include: {all: true}})
     return user
   }
+
+  async updateBalance(data: any){
+    const user = await this.userRepository.findOne({where: {id: data.id}, include: {all: true}})
+    await user.update({balance_RUB: user.balance_RUB + data.amount})
+    return user
+  }
+
 }

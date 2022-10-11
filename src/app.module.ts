@@ -10,6 +10,9 @@ import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { MulterModule } from "@nestjs/platform-express";
+import { FinanceModule } from './finance/finance.module';
+import { CasesModule } from './cases/cases.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 
 @Module({
@@ -26,10 +29,12 @@ import { MulterModule } from "@nestjs/platform-express";
       models: [],
       autoLoadModels: true,
     }),
-    MulterModule.register({dest:"./media"}),
     UsersModule,
     RolesModule,
     AuthModule,
+    FinanceModule,
+    CasesModule,
+    InventoryModule,
   ]
 })
 

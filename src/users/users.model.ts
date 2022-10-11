@@ -10,13 +10,22 @@ export class User extends Model<User>{
   id: number;
 
   @Column({type: DataType.STRING, unique: false, allowNull: false})
-  name: string;
+  nickname: string;
 
   @Column({type: DataType.STRING, unique: true, allowNull: false})
-  email: string;
+  telegramId: string;
 
-  @Column({type: DataType.STRING, unique: false, allowNull: false})
-  password: string;
+  @Column({type: DataType.INTEGER, allowNull: false, defaultValue:0})
+  balance_RUB: number;
+
+  @Column({type: DataType.INTEGER, allowNull: false, defaultValue:0})
+  balance_UC: number;
+
+  @Column({type: DataType.STRING, allowNull: false})
+  referral_code: string;
+
+  @Column({type: DataType.BOOLEAN, defaultValue: false})
+  is_referral: boolean
 
   @BelongsToMany(()=> Roles, ()=>UserRoles)
   roles: Roles[]
